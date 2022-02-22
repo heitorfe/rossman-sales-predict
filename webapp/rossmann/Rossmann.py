@@ -8,12 +8,12 @@ import datetime
 
 class Rossmann(object):
     def __init__(self):
-        self.home_path = r''
-        self.competition_distance_scaler = pickle.load( open( self.home_path +'\competition_distance_scaler.pkl', 'rb'))
-        self.competition_time_month_scaler = pickle.load( open( self.home_path +'\competition_time_month_scaler.pkl', 'rb'))
-        self.promo_time_week_scaler =  pickle.load( open(self.home_path + '\promo_time_week_scaler.pkl', 'rb'))
-        self.year_scaler =  pickle.load( open( self.home_path + '\year_scaler.pkl', 'rb'))
-        self.store_type_scaler = pickle.load( open(self.home_path +' \store_type_scaler.pkl', 'rb'))
+#         self.home_path = r''
+        self.competition_distance_scaler = pickle.load( open( 'parameter/competition_distance_scaler.pkl', 'rb'))
+        self.competition_time_month_scaler = pickle.load( open( 'parameter/competition_time_month_scaler.pkl', 'rb'))
+        self.promo_time_week_scaler =  pickle.load( open('parameter/promo_time_week_scaler.pkl', 'rb'))
+        self.year_scaler =  pickle.load( open( 'parameter/year_scaler.pkl', 'rb'))
+        self.store_type_scaler = pickle.load( open('parameter/store_type_scaler.pkl', 'rb'))
     def data_cleaning(self, df1):
         
         
@@ -27,7 +27,12 @@ class Rossmann(object):
         snakecase = lambda x: inflection.underscore(x)
         cols_new = list(map(snakecase, cols_old))
         df1.columns = cols_new
+        
+        ## 1.3. Data types
 
+        df1['date'] = pd.to_datetime( df1['date'] )
+        df1.dtypes
+        
         ### 1.5. Fillout NA
         # competition_distance
         df1['competition_distance'] = df1['competition_distance'].apply(lambda x: 200000.0 if math.isnan(x) else x)# competition_open_since_month  
@@ -52,14 +57,15 @@ class Rossmann(object):
 
         df1['month_map'] = df1['date'].dt.month.map(month_map)
 
-        df1['is_promo2'] = df1[['promo_interval', 'month_map']].apply(lambda x: 0 if x['promo_interval'] == 0 else 1 if x['month_map'] in x['promo_interval'].split(',') else 0, axis =1)
+        df1['is_promo'] = df1[['promo_interval', 'month_map']].apply(lambda x: 0 if x['promo_interval'] == 0 else 1 if x['month_map'] in x['promo_interval'].split(',') else 0, axis =1)
 
         ### 1.6 Change Types
 
-        df1['competition_open_since_month'] = df1['competition_open_since_month'].astype('int64')
-        df1['competition_open_since_year'] = df1['competition_open_since_year'].astype('int64')
-        df1['promo2_since_week'] = df1['promo2_since_week'].astype('int64')
-        df1['promo2_since_year'] = df1['promo2_since_year'].astype('int64')
+        df1['competition_open_since_month'] = df1['competition_open_since_month'].astype( np.int64 )
+        df1['competition_open_since_year'] = df1['competition_open_since_year'].astype( np.int64 )
+        df1['promo2_since_week'] = df1['promo2_since_week'].astype( np.int64 )
+        df1['promo2_since_year'] = df1['promo2_since_year'].astype( np.int64 )
+        df1['is_promo'] = df1['is_promo'].astype( np.int64 )
         return df1
 
 
@@ -97,7 +103,7 @@ class Rossmann(object):
         df2['state_holiday'] = df2['state_holiday'].apply(lambda x:'public_holiday' if x=='a' else 'easter_holiday' if x == 'b' else 'christmas' if x=='c' else 'regular_day')
 
         ### 3.1. Filtragem de linhas
-        df2 = df2[(df2['sales']>0)]
+        df2 = df2[(df2['open']>0)]
 
 
         ### 3.2. Filtragem de colunas
@@ -106,7 +112,7 @@ class Rossmann(object):
 
 
 
-    def data_preparation(self, df5):
+    def data_transformation( self, df5 ):
 
         ### 5.2. Rescaling
         #competition distance
@@ -158,9 +164,9 @@ class Rossmann(object):
     
     def get_prediction(self, model, original_data, test_data):
         #prediction
-        pred = modelpredict(test_data)
+        pred = model.predict(test_data)
         
         #join pred into the original data
-        original_data['prediction'] = np.expn1(pred)
+        original_data['prediction'] = np.expm1(pred)
         
-        return original_data.to_json(orient='records', data_format='iso')
+        return original_data.to_json(orient='records', date_format='iso')
