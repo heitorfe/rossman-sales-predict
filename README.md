@@ -99,7 +99,7 @@ The CFO now can know the budget available to renovate the stores, with 90% accur
 
 ![First 15 rows of the prediction dataset.](https://user-images.githubusercontent.com/77629603/155379600-1321b4d9-6db2-4941-80cf-96012798fe00.png)
 
-The user can get the results by Telegram. Here is some demonstration(link)!
+The user can get the results by Telegram. Here is some [demonstration](https://www.linkedin.com/posts/heitor-felix_datascience-datadriven-business-activity-6902361790051606528-2Fjo)!
 
 ## 4.3. Machine Learning Performance
 
