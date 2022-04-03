@@ -29,7 +29,7 @@ The CFO wants to know the budget to renovate each store.
 
 -Sales prediction visualization may be made by Telegram request (API)
 
-#3. Solution Development
+# 3. Solution Development
 
 ## 3.1. Data Description 
 
