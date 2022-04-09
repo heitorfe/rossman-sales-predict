@@ -15,13 +15,13 @@ The CFO wants to renovate the stores, but he wants to be sure how much he can sp
 
 ## 2.2. Causes
 
--Current prediction proccess is inaccurate 
+* Current prediction proccess is inaccurate 
 
--Current prediction proccess isn't scientific and data-driven
+* Current prediction proccess isn't scientific and data-driven
 
--Current sales prediction is done manually by the 1,115 stores
+* Current sales prediction is done manually by the 1,115 stores
 
--Sales visualization was limited to the computer
+* Sales visualization was limited to the computer
 
 ## 2.3. Business Assumptions
 * The data contains historical data of 1115 stores;
@@ -54,9 +54,9 @@ The CFO wants to renovate the stores, but he wants to be sure how much he can sp
 
 ## 2.4. Solution
 
--Using Machine Learning model to make sales prediction of every store
+* Using Machine Learning model to make sales prediction of every store
 
--Sales prediction visualization may be made by Telegram request (API)
+* Sales prediction visualization may be made by Telegram request (API)
 
 # 3. Solution Development
 
