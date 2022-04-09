@@ -89,21 +89,6 @@ Creating new attributes from the original data.
 
 Trying to get insights by data analysis with graphs, histograms, plotlines and barplot. Also checking the correlation of the features and testing hypotesis.
 
- <details>
-<summary>Numerical features correlation (heatmap)</summary>
-  ![image](https://user-images.githubusercontent.com/77629603/162583762-a5ba6c9f-a419-4071-92d4-fcb2200c9aee.png)
-Pearson method
-  
-   </details>
-   
-    <details>
-<summary>Categorical features correlation (heatmap)</summary>
-  ![image](![image](https://user-images.githubusercontent.com/77629603/162583792-8d20eeb5-c2a6-473e-8d72-40547b95e3e5.png)
-)
-Cramer V method
-  
-   </details>
-
 ## 3.4. Data Preparation
 
 Using normalization, rescaling and encoding to prepare the data to the Machine Learning model. Sine and cossine transformations were used in cyclical features as month, day and week of year.
@@ -126,6 +111,8 @@ Giving business meaning to the project, translating accuracy in values to the bu
 
 Deploy in the Heroku Cloud and configurating Flask API request by a Telegram Bot. 
 The user types /store_id and gets the sales prediction of this store for the next six weeks.
+
+
 <img src="https://user-images.githubusercontent.com/77629603/162584257-c7783ef3-d434-4910-9878-c2bfb4057228.png" alt="" style="width:300px;"/>
 
 
@@ -136,19 +123,19 @@ The user types /store_id and gets the sales prediction of this store for the nex
 The main hypotesis confirmed in the EDA step:
 
 ### H1. Stores with larger assortments should sell more.
-False. Stores with larger assortments should sell less.
+**False** <br />Stores with larger assortments should sell less.
 
 ![Sales sum by assortment](https://user-images.githubusercontent.com/77629603/155387884-6c33a7be-82e5-4c57-8648-28bf0f217aae.png)
 
 
 ### H2. Stores with closer competitors should sell less.
-False. Stores with closer competitors sell more.
+**False**  <br />Stores with closer competitors sell more.
 
 ![Sales by competition distance (bin = 0-1000)](https://user-images.githubusercontent.com/77629603/155381618-a59fdbc2-e4af-45dd-8458-3159ddc01eac.png)
 
 
 ### H3. Stores with longer active promotions should sell more.
-False. We can see that sales increase in the standard promos and decreases in the extended promos.
+**False** <br />We can see that sales increase in the standard promos and decreases in the extended promos.
 (Negative promo duration is regular promo, positive promo duration is extanded promo)
 
 ![Regplot representing sales by promo duration](https://user-images.githubusercontent.com/77629603/155382386-6c6462ab-0820-4dae-a1ca-51ea9a0aad33.png)
