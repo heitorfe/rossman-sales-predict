@@ -11,7 +11,7 @@ This project is based in a Kaggle Challenge wich simulates a business problem. R
 
 ## 2.1. Problem
 
-The CFO wants to know the budget to renovate each store.
+The CFO wants to renovate the stores, but he wants to be sure how much he can spend based on the future sales.
 
 ## 2.2. Causes
 
@@ -23,7 +23,36 @@ The CFO wants to know the budget to renovate each store.
 
 -Sales visualization was limited to the computer
 
-## 2.3. Solution
+## 2.3. Business Assumptions
+* The data contains historical data of 1115 stores;
+* The data available are between 2013-01-01 and 2015-07-31;
+* Null values of competition distance was replaced to 200.000 meters, assuming that there are no competitors
+<details>
+<summary>Features definition</summary>
+  
+| Feature                | Definition                                                                                               |
+|------------------------|----------------------------------------------------------------------------------------------------------|
+| id                     | unique id that represent store and date of sale                                                          |
+| store                  | a unique Id for each store                                                                               |
+| sales                  | the turnover for any given day (target variable)                                                         |
+| customers              | the number of customers on a given day                                                                   |
+| open                   | an indicator for whether the store was open (0/1)                                                        |
+| state holiday          | indicates a state holiday (a = public holiday, b = Easter holiday, c = Christmas, 0 = None)              |
+| school holiday         | indicates if the (Store, Date) was affected by the closure of public schools                             |
+| store type             | differentiates between 4 different store models. (a, b, c, d)                                            |
+| assortment             | describes an assortment level (a = basic, b = extra, c = extended)                                       |
+| competition distance   | distance in meters to the nearest competitor store                                                       |
+| competition open since | gives the approximate year and month of the time the nearest competitor was opened                       |
+| promo                  | indicates whether a store is running a promo on that day                                                 |
+| promo 2                | Promo2 is a continuing and consecutive promotion for some stores (0/1)                                   |
+| promo 2 since          | describes the year and calendar week when the store started participating in Promo2                      |
+| promo interval         | describes the consecutive intervals Promo2 is started, naming the months the promotion is started anew.  |
+  
+ </details>
+ 
+ 
+
+## 2.4. Solution
 
 -Using Machine Learning model to make sales prediction of every store
 
@@ -38,15 +67,46 @@ Checking the shape of the datase, nulls and filling the nulls values.
 ## 3.2. Feature Engineering
 
 Creating new attributes from the original data. 
-(Ex: extract day, year, month from date)
+
+<details>
+<summary>Features created</summary>
+
+| Feature           | Definition                                         |
+|-------------------|----------------------------------------------------|
+| year              | year extracted from date                           |
+| month             | month extracted from date                          |
+| day               | day extracted from date                            |
+| week of year      | week of year extracted from date                   |
+| year week         | year week extracted from date (Y-W)                |
+| promo since       | date since promotion started (Y-W)                 |
+| competition since | date since competition started (year, month, year) |
+
+</details>
+
+
 
 ## 3.3. Exploratory Data Analysis
 
 Trying to get insights by data analysis with graphs, histograms, plotlines and barplot. Also checking the correlation of the features and testing hypotesis.
 
+ <details>
+<summary>Numerical features correlation (heatmap)</summary>
+  ![image](https://user-images.githubusercontent.com/77629603/162583762-a5ba6c9f-a419-4071-92d4-fcb2200c9aee.png)
+Pearson method
+  
+   </details>
+   
+    <details>
+<summary>Categorical features correlation (heatmap)</summary>
+  ![image](![image](https://user-images.githubusercontent.com/77629603/162583792-8d20eeb5-c2a6-473e-8d72-40547b95e3e5.png)
+)
+Cramer V method
+  
+   </details>
+
 ## 3.4. Data Preparation
 
-Using normalization, rescaling and encoding to prepare the data to the Machine Learning model.
+Using normalization, rescaling and encoding to prepare the data to the Machine Learning model. Sine and cossine transformations were used in cyclical features as month, day and week of year.
 
 ## 3.5. Feature Selection
 
@@ -54,10 +114,9 @@ Using the Boruta algorithm to select the most important features to get the best
 
 ## 3.6. Machine Learning Model
 
-Training different Machine Learning models and comparing errors. The choosen method was the XGBoost Regressor because of the speed and accuracy of the model. 
+Training different Machine Learning models and comparing errors. The choosen method was the XGBoost Regressor because of the speed and accuracy of the model.
 
 ![Performances without fine tuning](https://user-images.githubusercontent.com/77629603/155387296-541ac158-9c6c-44f5-913c-40b1aa2b02a4.png)
-
 
 ## 3.7. Error Translation
 
@@ -66,8 +125,9 @@ Giving business meaning to the project, translating accuracy in values to the bu
 ## 3.8. Deploy and Telegram BOT
 
 Deploy in the Heroku Cloud and configurating Flask API request by a Telegram Bot. 
+The user types /store_id and gets the sales prediction of this store for the next six weeks.
+<img src="https://user-images.githubusercontent.com/77629603/162584257-c7783ef3-d434-4910-9878-c2bfb4057228.png" alt="" style="width:300px;"/>
 
-Telegram bot username: @rossmann_salesp_bot
 
 # 4. Results and Conclusion
 
@@ -103,6 +163,9 @@ The user can get the results by Telegram. Here is some [demonstration](https://w
 
 ## 4.3. Machine Learning Performance
 
+**Final model performance**
+![image](https://user-images.githubusercontent.com/77629603/162584149-291cea37-819d-4f18-bd67-0aac45349557.png)
+
 Here is the demonstration of the model prediction vs real sales by date
 
 ![Seaborn lineplot](https://user-images.githubusercontent.com/77629603/155380531-060fbf29-4f30-486f-b875-4d3b0ead5178.png)
@@ -114,5 +177,5 @@ Here is the demonstration of the model prediction vs real sales by date
 *Improve the performance in the next CRISP cycle
 
 # 6. References
-
-The data is avaliable in this [page](https://www.kaggle.com/c/rossmann-store-sales)
+[Kaggle](https://www.kaggle.com/c/rossmann-store-sales)
+[Comunidade DS](https://www.comunidadedatascience.com/)
