@@ -173,9 +173,9 @@ Here is the demonstration of the model prediction vs real sales by date
 
 # 5. Next Steps
 
-*Collecting feedback of the users and improve the usability if necessary
-*Improve the performance in the next CRISP cycle
+* Collecting feedback of the users and improve the usability if necessary
+* Improve the performance in the next CRISP cycle
 
 # 6. References
-[Kaggle](https://www.kaggle.com/c/rossmann-store-sales)
-[Comunidade DS](https://www.comunidadedatascience.com/)
+* [Kaggle](https://www.kaggle.com/c/rossmann-store-sales)
+* [Comunidade DS](https://www.comunidadedatascience.com/)
