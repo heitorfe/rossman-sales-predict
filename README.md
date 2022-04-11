@@ -27,6 +27,7 @@ The CFO wants to renovate the stores, but he wants to be sure how much he can sp
 * The data contains historical data of 1115 stores;
 * The data available are between 2013-01-01 and 2015-07-31;
 * Null values of competition distance was replaced to 200.000 meters, assuming that there are no competitors
+* Days when the stores were closed, were not considered
 <details>
 <summary>Features definition</summary>
   
