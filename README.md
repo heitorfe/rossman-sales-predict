@@ -141,6 +141,8 @@ The main hypotesis confirmed in the EDA step:
 
 ![Regplot representing sales by promo duration](https://user-images.githubusercontent.com/77629603/155382386-6c6462ab-0820-4dae-a1ca-51ea9a0aad33.png)
 
+Note: Sales = Revenue
+
 ## 4.2.Conclusion
 The model generates a dataframe with the prediction of each store and the respectives worst and best scenarios. 
 The CFO now can know the budget available to renovate the stores, with 90% accuracy.
